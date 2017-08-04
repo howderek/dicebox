@@ -64,6 +64,6 @@ class ViewController: NSViewController {
         formatter.maximumFractionDigits = 2
         Result.stringValue = diceEquation + " = " + formatter.string(from: NSDecimalNumber(value: result))!
     }
-    
+
 }
 

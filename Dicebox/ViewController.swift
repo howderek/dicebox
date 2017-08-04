@@ -43,11 +43,18 @@ class ViewController: NSViewController {
         if diceEquation.isEmpty {
             diceEquation = "0"
         }
-        let matched = matches(for: "[0-9]+d[0-9]+", in: diceEquation)
+        let matched = matches(for: "[0-9]?+d[0-9]+", in: diceEquation)
         for match in matched {
             let subgroup = matches(for: "[0-9]+", in: match)
-            let numberOfDice:Int! = Int(subgroup[0])
-            let typeOfDice:Int! = Int(subgroup[1])
+            var numberOfDice:Int!
+            var typeOfDice:Int!
+            if subgroup.count > 1 {
+                numberOfDice = Int(subgroup[0])
+                typeOfDice = Int(subgroup[1])
+            } else {
+                numberOfDice = Int(1)
+                typeOfDice = Int(subgroup[0])
+            }
             var total:UInt32! = 0
             for _ in 0..<numberOfDice {
                 total = total + UInt32(arc4random_uniform(UInt32(typeOfDice)) + 1)
